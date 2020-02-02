@@ -11,7 +11,6 @@ export interface ITodolist {
 
 export interface IAppTypesProps {
     todolists: Array<ITodolist>;
-    filterValue: string;
 }
 
 

@@ -11,7 +11,7 @@ class Task extends React.Component<IProps> {
     render() {
         return (
             <div>
-                {this.props.task.title}
+                <input type={"checkbox"} checked={this.props.task.status}/>{this.props.task.title}
             </div>
         );
     }
