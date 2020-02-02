@@ -1,26 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Todolist from "./Todolist";
+import {IAppTypesProps} from "./types";
 
-const App = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+interface IState {
+    isVisible: boolean
+}
+
+interface IProps{
+    state: IAppTypesProps
+}
+
+class App extends React.Component<IProps, IState> {
+    state: IState = {
+        isVisible: true
+    }
+
+    render() {
+        return (
+            <div className="App">
+                {this.props.state.todolists.map(tl => {
+                    return    <Todolist todolist={tl} />
+                })}
+
+                {this.state.isVisible ? 'Alex' : 'Lena'}
+                {this.state.isVisible && <button onClick={() => this.setState({isVisible: false})}>Toogle</button>}
+                {!this.state.isVisible && <button onClick={() => this.setState({isVisible: true})}>Toogle</button>}
+            </div>
+        );
+    }
+
+
 }
 
 export default App;
