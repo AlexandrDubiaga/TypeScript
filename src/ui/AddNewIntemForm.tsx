@@ -1,4 +1,4 @@
-import React,{ChangeEvent} from 'react';
+import React, {ChangeEvent} from 'react';
 interface IProps {
     addItem: (value: string) => void
 }

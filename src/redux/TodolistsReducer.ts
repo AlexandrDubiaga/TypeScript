@@ -1,10 +1,14 @@
+import {ITodolist} from "../types";
 const ADD_TODOLIST = "ADD_TODOLIST"
 const REMOVE_TODOLIST = "REMOVE_TODOLIST"
 const UPDATE_TODOLIST = "UPDATE_TODOLIST"
 
 const ADD_TASK = "ADD_TASK"
 
-
+interface IInitialState{
+    items:Array<ITodolist>,
+    filterValue:string
+}
 const initialState = {
     items: [
         {id: 1, title: 'First Todolist', tasks: [{title: 'First Task', status: true}]},
@@ -13,10 +17,13 @@ const initialState = {
     ],
     filterValue:'All'
 }
-const todolistReducer = (state = initialState, action: TodolistReducerActionsTypes) => {
+const todolistReducer = (state:IInitialState = initialState, action: TodolistReducerActionsTypes):IInitialState => {
     switch (action.type){
         case ADD_TODOLIST:{
-            return state
+            return {
+                ...state,
+                items:[...state.items, {id:4,title:action.title,tasks:[]}],
+            }
         }
         case REMOVE_TODOLIST:{
             return state
@@ -27,12 +34,12 @@ const todolistReducer = (state = initialState, action: TodolistReducerActionsTyp
 }
 
 interface IAddTodolistAction{
-    type:string,
+    type:typeof ADD_TODOLIST
     title:string
 }
 
 interface IRemoveTodolistAction{
-    type:string,
+    type: typeof REMOVE_TODOLIST
     id:string
 }
 
