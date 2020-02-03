@@ -9,9 +9,6 @@ export interface ITodolist {
     tasks: Array<ITasks>
 }
 
-export interface IAppTypesProps {
-    todolists: Array<ITodolist>;
-}
 
 
 

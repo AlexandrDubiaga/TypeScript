@@ -10,7 +10,8 @@ const initialState = {
         {id: 1, title: 'First Todolist', tasks: [{title: 'First Task', status: true}]},
         {id: 2, title: 'Second Todolist', tasks: [{title: 'Second Task', status: false}]},
         {id: 3, title: 'Third Todolist', tasks: [{title: 'Third Task', status: true}]}
-    ]
+    ],
+    filterValue:'All'
 }
 const todolistReducer = (state = initialState, action: TodolistReducerActionsTypes) => {
     switch (action.type){
@@ -37,7 +38,7 @@ interface IRemoveTodolistAction{
 
 type TodolistReducerActionsTypes = IAddTodolistAction | IRemoveTodolistAction;
 
-const addTodolistAC = (title: string):IAddTodolistAction => ({
+export const addTodolistAC = (title: string):IAddTodolistAction => ({
     type: ADD_TODOLIST,
     title
 })
