@@ -15,25 +15,25 @@ export const todoAPI = {
     addTodolist(newTodoTitle:string){
         return instance.post(`todo-lists`,{title:newTodoTitle});
     },
-    deleteTodolist(id:number){
+    deleteTodolist(id:string){
         return instance.delete(`todo-lists/${id}`);
     },
-    updateTodolist(id:number, title:string){
+    updateTodolist(id:string, title:string){
         return instance.put(`todo-lists/${id}`, {title: title});
     }
 }
 
 export const tasksAPI = {
-    getTasks(todoId:number){
+    getTasks(todoId:string){
         return instance.get(`todo-lists/${todoId}/tasks`);
     },
-    addTask(todoId:number,newTask:string){
+    addTask(todoId:string,newTask:string){
         return instance.post(`todo-lists/${todoId}/tasks`, {title: newTask});
     },
-    deleteTask(todoId:number,taskId:number){
+    deleteTask(todoId:string,taskId:string){
         return instance.delete(`todo-lists/${todoId}/tasks/${taskId}`);
     },
-    updateTask(todoId:number, taskId:number, task:any){
+    updateTask(todoId:string, taskId:string, task:any){
         return instance.put(`todo-lists/${todoId}/tasks/${taskId}`,task);
     }
 
