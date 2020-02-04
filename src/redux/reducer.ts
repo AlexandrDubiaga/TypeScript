@@ -7,13 +7,18 @@ const DELL_TODOLIST = "DELL_TODOLIST";
 const CHANGE_TODO_TITLE = "CHANGE_TODO_TITLE";
 const SET_TASKS = "SET_TASKS";
 const ADD_TASK = "ADD_TASK";
+const DELL_TASK = "DELL_TASK";
+const CHANGE_TASK = "CHANGE_TASK";
+const CHANGE_FILTER = "CHANGE_FILTER";
 
 
 interface IInitialState {
     todolists: Array<ITodolist>,
+    filterValue: string
 }
 let initialState = {
-    todolists: []
+    todolists: [],
+    filterValue: 'All'
 }
 
 const reducer = (state: IInitialState = initialState, action: TodolistReducerActionsTypes): IInitialState => {
@@ -70,10 +75,53 @@ const reducer = (state: IInitialState = initialState, action: TodolistReducerAct
                     if (tl.id === action.todoId) {
                         return {
                             ...tl,
-                            tasks: [...tl.tasks, {...action.task.data.item}]
+                            tasks: [...tl.tasks, {...action.task}]
                         }
                     } else return tl
                 })
+            }
+        }
+        case DELL_TASK: {
+            return {
+                ...state,
+                todolists: state.todolists.map(tl => {
+                    if (tl.id === action.todoId) {
+                        return {
+                            ...tl,
+                            tasks: tl.tasks.filter(t => {
+                                return t.id !== action.taskId
+                            })
+                        }
+                    }
+                    return tl
+                })
+            }
+        }
+
+        case CHANGE_TASK: {
+            return {
+                ...state,
+                todolists: state.todolists.map(tl => {
+                    if (tl.id === action.todoId) {
+                        return {
+                            ...tl,
+                            tasks: [...tl.tasks.map(task => {
+                                if (task.id === action.taskId) {
+                                    return {
+                                        ...task, ...action.task
+                                    }
+                                }
+                                return task
+                            })]
+                        }
+                    } else return tl
+                })
+            }
+        }
+        case CHANGE_FILTER: {
+            return {
+                ...state,
+                filterValue: action.filter
             }
         }
 
@@ -85,7 +133,7 @@ type TodolistReducerActionsTypes =
     ISetTodolistAction
     | IAddTodolistAction
     | IDeleteTodolistAction
-    | IChangeTodolistAction | ISetTaskAction | IAddTaskAction;
+    | IChangeTodolistAction | ISetTaskAction | IAddTaskAction | IDeleteTaskAction | IChangeTaskAction | IChangeFilter;
 
 
 export interface ISetTodolistAction {
@@ -190,23 +238,9 @@ export const changeTodoTitleAC = (idTodo: string, title: string): IChangeTodolis
     title
 });
 
-
 export interface IResponceTaskAction {
     data: {
-        items: [{
-            description: string
-            title: string
-            completed: boolean
-            status: number
-            priority: number
-            startDate: string
-            deadline: string
-            id: string
-            todoListId: string
-            order: number
-            addedDate: string
-            resultCode: number
-        }]
+        items: Array<ITasks>
         totalCount: number,
         error: string
     }
@@ -215,44 +249,32 @@ export interface IResponceTaskAction {
 export interface ISetTaskAction {
     type: typeof SET_TASKS,
     todoId: string
-    tasks: any
+    tasks: Array<ITasks>
 }
-export const getTasksThunk = (idTodolist: string, tasks: any) => {
+export const getTasksThunk = (idTodolist: string, tasks: Array<ITasks>) => {
     return async (dispatch: Dispatch) => {
         await tasksAPI.getTasks(idTodolist).then((response: IResponceTaskAction) => {
-            debugger
             dispatch(setTasksAC(idTodolist, response.data.items))
         })
     }
 }
-export const setTasksAC = (todoId: string, tasks: any): ISetTaskAction => ({type: SET_TASKS, todoId, tasks});
+export const setTasksAC = (todoId: string, tasks: Array<ITasks>): ISetTaskAction => ({type: SET_TASKS, todoId, tasks});
 
 
 export interface IAddTaskAction {
     type: typeof ADD_TASK,
     todoId: string
-    task: any
+    task: ITasks
 }
 
 export interface IResponceAddTaskAction {
     data: {
-        item: {
-            description: string
-            title: string
-            completed: boolean
-            status: number
-            priority: number
-            startDate: string
-            deadline: string
-            id: string
-            todoListId: string
-            order: number
-            addedDate: string
-            resultCode: number
+        data: {
+            item: ITasks
         }
-        messages: Array<string>,
-        resultCode: number
     }
+    messages: Array<string>,
+    resultCode: number
     headers: any,
     config: any
     request: any
@@ -263,13 +285,76 @@ export interface IResponceAddTaskAction {
 export const addTasksThunk = (idTodolist: string, newTask: string) => {
     return async (dispatch: Dispatch) => {
         await tasksAPI.addTask(idTodolist, newTask).then((response: IResponceAddTaskAction) => {
-            debugger
-            dispatch(addTaskAC(idTodolist, response.data))
+            dispatch(addTaskAC(idTodolist, response.data.data.item))
         })
     }
 }
 
-export const addTaskAC = (todoId: string, task: any): IAddTaskAction => ({type: ADD_TASK, todoId, task});
+export const addTaskAC = (todoId: string, task: ITasks): IAddTaskAction => ({type: ADD_TASK, todoId, task});
+
+
+export interface IDeleteTaskAction {
+    type: typeof DELL_TASK
+    todoId: string,
+    taskId: string
+}
+
+interface IDeleteTaskResponce {
+    data: {
+        data: object
+        messages: Array<string>
+        resultCode: number
+    }
+}
+export const deleteTaskAc = (todoId: string, taskId: string): IDeleteTaskAction => ({type: DELL_TASK, todoId, taskId});
+
+export const deleteTaskThunk = (idTodo: string, taskId: string) => {
+    return async (dispatch: Dispatch) => {
+        await tasksAPI.deleteTask(idTodo, taskId).then((response: IDeleteTaskResponce) => {
+            dispatch(deleteTaskAc(idTodo, taskId))
+        })
+    }
+}
+
+export interface IChangeTaskAction {
+    type: typeof CHANGE_TASK
+    todoId: string,
+    taskId: string,
+    task: any
+}
+export interface IResponceChangeTaskAction {
+    data: {
+        data: {
+            item: ITasks
+            messages: Array<string>,
+            resultCode: number
+        }
+    }
+    headers: any,
+    config: any
+    request: any
+
+}
+export const changeTaskAC = (todoId: string, taskId: string, task: any): IChangeTaskAction => ({
+    type: CHANGE_TASK,
+    todoId,
+    taskId,
+    task
+});
+
+export const changeTaskThunk = (idTodo: string, taskId: string, task: ITasks) => {
+    return async (dispatch: Dispatch) => {
+        tasksAPI.updateTask(idTodo, taskId, task).then((response: IResponceChangeTaskAction) => {
+            dispatch(changeTaskAC(idTodo, taskId, response.data.data.item))
+        })
+    }
+}
+
+export interface IChangeFilter {
+    type: typeof CHANGE_FILTER
+    filter: string
+}
+export const changeFilterValueAC = (filter: string): IChangeFilter => ({type: CHANGE_FILTER, filter});
 
 
 export default reducer;
