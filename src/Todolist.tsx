@@ -1,20 +1,20 @@
 import React from 'react';
 import './App.css';
-import {ITodolist} from "./types";
+import {ITasks, ITodolist} from "./types";
 import Task from "./Task";
 
 interface IProps {
-    todolist: ITodolist
+    id: string,
+    title: string,
+    tasks: Array<ITasks>
 }
 
 class Todolist extends React.Component<IProps> {
+
     render() {
         return (
             <div>
-                <div>Id: {this.props.todolist.id}-Age {this.props.todolist.title} {this.props.todolist.tasks.map(task => {
-                    return <Task task={task} />
-                })}</div>
-
+                <div>Title: {this.props.title}</div>
             </div>
         );
     }

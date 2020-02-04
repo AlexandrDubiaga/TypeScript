@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ChangeEvent} from 'react';
 import './App.css';
 import Todolist from "./Todolist";
 import {ITodolist} from "./types";
@@ -6,40 +6,44 @@ import {connect} from "react-redux";
 import {AppStateType} from "./redux/store";
 import AddNewIntemForm from "./ui/AddNewIntemForm";
 import {Dispatch} from "redux";
-import {addTodolistAC} from "./redux/TodolistsReducer";
+import {addTodolistThunk, INewTodolist, setTodolistThunk} from "./redux/reducer"
 
 
 interface IState {
-    isVisible: boolean
+    isVisible: boolean,
+    title:string
 }
 interface IMapStateToProps {
-    todolists: Array<ITodolist>,
-    filterValue: string
+    todolists: Array<ITodolist>
 }
 
 interface IMapDispatchToProps {
-    addTodolist:(title:string)=>void
+    getTodolists:()=>void,
+    addTodo:(newTodolist:string)=> void
 }
 
 class App extends React.Component<IMapStateToProps & IMapDispatchToProps, IState> {
-    state: IState = {
-        isVisible: true
+    componentDidMount(){
+        this.props.getTodolists()
     }
-    addnewTodolist = (title: string) => {
-       this.props.addTodolist(title)
+    addNewTodo = (newTitle:string) => {
+        this.props.addTodo(newTitle);
     }
 
+    state: IState = {
+        isVisible: true,
+        title:''
+    }
+
+
     render() {
+        let todolists = this.props.todolists.map(function (tl) {
+            return <Todolist id={tl.id} title={tl.title} tasks={tl.tasks}/>
+        })
         return (
             <div className="App">
-                <AddNewIntemForm addItem={this.addnewTodolist}/>
-                {this.props.todolists.map(tl => {
-                    return <Todolist todolist={tl}/>
-                })}
-                <div>{this.props.filterValue}</div>
-                {this.state.isVisible ? 'Alex' : 'Lena'}
-                {this.state.isVisible && <button onClick={() => this.setState({isVisible: false})}>Toogle</button>}
-                {!this.state.isVisible && <button onClick={() => this.setState({isVisible: true})}>Toogle</button>}
+                {todolists}
+                <AddNewIntemForm addItem={this.addNewTodo} />
             </div>
         );
     }
@@ -47,13 +51,15 @@ class App extends React.Component<IMapStateToProps & IMapDispatchToProps, IState
 
 let mapStateToProps = (state: AppStateType): IMapStateToProps => {
     return {
-        todolists: state.todo.items,
-        filterValue: state.todo.filterValue
+        todolists: state.todo.todolists
     }
 }
-let mapDispatchToProps = (dispatch: Dispatch):IMapDispatchToProps => ({
-    addTodolist:(title:string)=>{
-        dispatch(addTodolistAC(title));
+let mapDispatchToProps = (dispatch: any):IMapDispatchToProps => ({
+    getTodolists:()=>{
+        dispatch(setTodolistThunk());
+    },
+    addTodo(newTodolist){
+        dispatch(addTodolistThunk(newTodolist))
     }
 })
 
