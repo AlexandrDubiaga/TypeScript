@@ -198,7 +198,7 @@ export interface IDeleteTodolistAction {
     idTodo: string
 }
 
-interface IDeleteResponce {
+export interface IDeleteResponce {
     data: {
         data: object
         messages: Array<string>
@@ -299,7 +299,7 @@ export interface IDeleteTaskAction {
     taskId: string
 }
 
-interface IDeleteTaskResponce {
+export interface IDeleteTaskResponce {
     data: {
         data: object
         messages: Array<string>
