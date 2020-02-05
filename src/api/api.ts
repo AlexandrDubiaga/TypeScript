@@ -24,13 +24,13 @@ export const todoAPI:ITodolistControll = {
     getTodolist(){
         return instance.get(`todo-lists`);
     },
-    addTodolist(newTodoTitle:string){
+    addTodolist(newTodoTitle){
         return instance.post(`todo-lists`,{title:newTodoTitle});
     },
-    deleteTodolist(id:string){
+    deleteTodolist(id){
         return instance.delete(`todo-lists/${id}`);
     },
-    updateTodolist(id:string, title:string){
+    updateTodolist(id, title){
         return instance.put(`todo-lists/${id}`, {title: title});
     }
 }
@@ -42,16 +42,16 @@ interface ITaskControll{
 }
 
 export const tasksAPI:ITaskControll = <ITaskControll>{
-    getTasks(todoId: string){
+    getTasks(todoId){
         return instance.get(`todo-lists/${todoId}/tasks`);
     },
-    addTask(todoId: string, newTask: string){
+    addTask(todoId, newTask){
         return instance.post(`todo-lists/${todoId}/tasks`, {title: newTask});
     },
-    deleteTask(todoId: string, taskId: string){
+    deleteTask(todoId, taskId){
         return instance.delete(`todo-lists/${todoId}/tasks/${taskId}`);
     },
-    updateTask(todoId: string, taskId: string, task: ITasks){
+    updateTask(todoId, taskId, task: ITasks){
         return instance.put(`todo-lists/${todoId}/tasks/${taskId}`, task);
     }
 }
