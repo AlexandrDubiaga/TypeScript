@@ -6,8 +6,17 @@ import {
 } from "../redux/reducer";
 const axios = require('axios');
 
+interface IInstanceControll{
+    withCredentials:boolean,
+    baseURL:string,
+    headers:object,
+    get:(url:string)=>void,
+    post:(url:string,data:object)=>void,
+    delete:(url:string)=>void,
+    put:(url:string,data:object)=>void
 
-const instance = axios.create({
+}
+const instance:IInstanceControll = axios.create({
     withCredentials: true,
     baseURL: "https://social-network.samuraijs.com/api/1.1/",
     headers: {"API-KEY": "ec13c7fa-bf13-4b56-aa9c-409a1e523851"}
@@ -20,12 +29,12 @@ interface ITodolistControll{
     updateTodolist:(id:string, title:string)=>void
 }
 
-export const todoAPI:ITodolistControll = {
+export const todoAPI:ITodolistControll = <ITodolistControll>{
     getTodolist(){
         return instance.get(`todo-lists`);
     },
     addTodolist(newTodoTitle){
-        return instance.post(`todo-lists`,{title:newTodoTitle});
+        return instance.post(`todo-lists`, {title: newTodoTitle});
     },
     deleteTodolist(id){
         return instance.delete(`todo-lists/${id}`);
