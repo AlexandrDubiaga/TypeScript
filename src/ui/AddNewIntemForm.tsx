@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from 'react';
 interface IProps {
     addItem: (value: string) => void,
-    nameValue: string
+    nameValue: string,
 }
 interface IState {
     value: string
@@ -24,8 +24,13 @@ class AddNewIntemForm extends React.Component<IProps, IState> {
                 <h4 className="nameBlock">{this.props.nameValue}</h4>
                 <div>
                     <input className="input" type="text" onChange={this.onChange} value={this.state.value}/>
-                    <button className="AddNewItemButton" disabled={this.state.value==''} onClick={this.onClick}>Add</button>
+                    <button className="AddNewItemButton" disabled={this.state.value === ''}
+                            onClick={this.onClick}>{this.state.value === '' ? 'Disabled' : "Add"}</button>
                 </div>
+                <div className="ErrorLenght">
+
+                </div>
+
             </div>
         )
 

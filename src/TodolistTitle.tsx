@@ -30,7 +30,7 @@ class TodolistTitle extends React.Component<IProps,IState> {
 
             <div className="TodoTitle">
                 {this.state.isVisible ?
-                    <div ><input
+                    <div ><input className="input"
                         onChange={this.updateTodoTitle}
                         autoFocus={true}
                         onBlur={this.setTodoTitle} value={this.props.title}/></div>

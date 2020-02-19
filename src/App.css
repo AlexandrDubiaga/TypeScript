@@ -15,6 +15,9 @@
     width: 400px;
     margin-bottom: 20px;
     padding: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    position: relative;
 }
 
 .OneTask {
@@ -28,6 +31,8 @@
 .TodoTitle {
     color: blue;
     font-weight: bold;
+    position: absolute;
+    z-index: 1;
 }
 
 .All {
@@ -60,16 +65,19 @@
 
 .nameBlock {
     text-align: center;
+    margin-bottom: 3px;
 }
-
 
 .input {
     border-radius: 5px;
     margin-bottom: 10px;
-    height: 20px;
-    margin-right: 2px;
+    margin-right: 10px;
     background-color: honeydew;
     text-align: center;
+    width: 270px;
+    height: 30px;
+    margin-left: 10px;
+    font-size: 20px;
 }
 
 textarea {
@@ -129,13 +137,27 @@ p {
 
 .showTasksContent .oneTaskContent {
     width: 300px;
+    background-color: floralwhite;
+    padding:0 5px 5px 5px;
+    border-radius: 5px;
 }
 
 .AddNewItemButton {
-    height: 25px;
+    height: 34px;
     background-color: floralwhite;
     color: black;
     border-radius: 2px;
+    width: 80px;
 }
-
+.AddNewItemBlock{
+    position: relative;
+    margin-top: 20px;
+}
+.ErrorLenght{
+    position: absolute;
+    right: 160px;
+    top: 80px;
+    font-size: 20px;
+    color: red;
+}
 

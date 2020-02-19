@@ -33,7 +33,7 @@ class App extends React.Component<IMapStateToProps & IMapDispatchToProps> {
         return (
             <>
             <div className="AddNewTodolist">
-                <AddNewIntemForm nameValue="Add Todolist"  addItem={this.addNewTodo}/>
+                <AddNewIntemForm nameValue="Add To Do List"  addItem={this.addNewTodo}/>
             </div>
             <div className="App">
                 {todolists}
