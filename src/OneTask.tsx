@@ -94,24 +94,30 @@ class OneTask extends React.Component<IProps, IState> {
         return (
             <div className="OneTask">
                 {this.state.isVisible ?
-                    <div>
+                    <div className="OneTaskBlockUpdate">
                         <form onChange={this.updateTaskInTodolist} className="form">
-                            <p>Title:</p> <input autoFocus={true} value={this.props.task.title}/>
+                            <p>Title:</p> <textarea autoFocus={true} value={this.props.task.title}/>
                             <div>
-                                <p>Priority:</p><select value={priority}>{this.state.priority.map((priority, idx) => <option
+                                <p>Priority:</p><select value={priority}>{this.state.priority.map((priority, idx) =>
+                                <option
                                     key={idx}>{priority}</option>)}</select>
-                                <button onClick={this.setChangeTask}>EDIT</button>
+
                             </div>
+                            <button className="editButton" onClick={this.setChangeTask}> EDIT</button>
                         </form>
                     </div> :
-
-                    <div className="OneTaskBlock" onDoubleClick={() => this.setState({isVisible: true})}><input
-                        checked={this.props.task.status === 2 ? true : false} onChange={this.changeStatus}
-                        type="checkbox"/><p>Title:</p> {this.props.task.title + " "}
+                    <div className="OneTaskBlock" onDoubleClick={() => this.setState({isVisible: true})}>
+                        <div className="showTasksContent">
+                            <div>
+                                <input checked={this.props.task.status === 2 ? true : false} onChange={this.changeStatus} type="checkbox"/><p>Title:</p>
+                            </div>
+                            <div className="oneTaskContent">{this.props.task.title + " "}</div>
+                        </div>
                         <div>
                             <p>Priority:</p> {priority}
-                        <button onClick={() => this.props.deleteTask(this.props.idTodo, this.props.idTask)}>x</button>
                         </div>
+                        <p>Delete task: </p>
+                        <button onClick={() => this.props.deleteTask(this.props.idTodo, this.props.idTask)}>x</button>
                     </div>
 
                 }

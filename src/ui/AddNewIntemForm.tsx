@@ -23,8 +23,8 @@ class AddNewIntemForm extends React.Component<IProps, IState> {
             <div className="AddNewItemBlock">
                 <h4 className="nameBlock">{this.props.nameValue}</h4>
                 <div>
-                    <input type="text" onChange={this.onChange} value={this.state.value}/>
-                    <button onClick={this.onClick}>Add</button>
+                    <input className="input" type="text" onChange={this.onChange} value={this.state.value}/>
+                    <button className="AddNewItemButton" disabled={this.state.value==''} onClick={this.onClick}>Add</button>
                 </div>
             </div>
         )
