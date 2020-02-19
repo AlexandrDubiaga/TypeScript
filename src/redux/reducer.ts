@@ -133,7 +133,12 @@ type TodolistReducerActionsTypes =
     ISetTodolistAction
     | IAddTodolistAction
     | IDeleteTodolistAction
-    | IChangeTodolistAction | ISetTaskAction | IAddTaskAction | IDeleteTaskAction | IChangeTaskAction | IChangeFilter;
+    | IChangeTodolistAction
+    | ISetTaskAction
+    | IAddTaskAction
+    | IDeleteTaskAction
+    | IChangeTaskAction
+    | IChangeFilter;
 
 
 export interface ISetTodolistAction {
@@ -278,9 +283,7 @@ export interface IResponceAddTaskAction {
     headers: any,
     config: any
     request: any
-
 }
-
 
 export const addTasksThunk = (idTodolist: string, newTask: string) => {
     return async (dispatch: Dispatch) => {

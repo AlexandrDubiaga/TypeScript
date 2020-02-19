@@ -75,7 +75,7 @@ class Todolist extends React.Component<IMapStateToProps & IMapDispatchToProps & 
             <div className="TodoList">
                 <TodolistTitle changeTodoTitle={this.changeTodoTitle} updateTodoTitle={this.updateTodoTitle}
                                idTodo={this.props.id} deleteTodolist={this.deleteTodolist} title={this.props.title}/>
-                <AddNewIntemForm addItem={this.addNewTask}/>
+                <AddNewIntemForm nameValue="Add Task" addItem={this.addNewTask}/>
                 <ShowTasks changeTaskInTodolist={this.changeTaskInTodolist}
                            updateTaskInTodolist={this.updateTaskInTodolist} deleteTask={this.deleteTask}
                            idTodo={this.props.id} tasks={this.props.tasks.filter(t => {
@@ -94,8 +94,6 @@ class Todolist extends React.Component<IMapStateToProps & IMapDispatchToProps & 
             </div>
         );
     }
-
-
 }
 
 let mapStateToProps = (state: AppStateType): IMapStateToProps => {

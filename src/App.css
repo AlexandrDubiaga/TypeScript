@@ -1,35 +1,76 @@
 .App {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .TodoList {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: deepskyblue;
+    margin-right: 20px;
+    width: 400px;
+    margin-bottom: 20px;
+    padding: 10px;
 }
-.TodoTitle{
-  color: blue;
-  font-weight: bold;
+.OneTask {
+    margin-bottom: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 350px;
+    flex-direction: row;
 }
-.OneTask{
-  margin-bottom:5px;
+
+.TodoTitle {
+    color: blue;
+    font-weight: bold;
 }
-.All{
-  color: white;
-  background-color: cornflowerblue;
+
+
+
+.All {
+    color: white;
+    background-color: cornflowerblue;
 }
-.Completed{
-  color: white;
-  background-color: sienna;
+
+.Completed {
+    color: white;
+    background-color: sienna;
 }
-.Active{
-  color: forestgreen;
-  background-color: lemonchiffon;
+
+.Active {
+    color: forestgreen;
+    background-color: lemonchiffon;
 }
-.New{
-  color: skyblue;
-  background-color: green;
+
+.New {
+    color: skyblue;
+    background-color: green;
 }
+
+.AddNewTodolist {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 40px;
+    background-color: pink;
+}
+
+.nameBlock {
+    text-align: center;
+}
+input{
+   border-radius: 5px;margin-bottom: 10px;
+}
+.OneTaskBlock{
+    border: 1px solid black;
+    padding: 5px;
+    width: 350px;
+    background-color: blanchedalmond;
+}
+p{
+    display: inline;
+    color: darkblue;
+    font-weight: bold;
+}
+
