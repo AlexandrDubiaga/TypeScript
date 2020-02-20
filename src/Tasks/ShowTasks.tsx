@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import OneTask from "./OneTask";
-import {ITasks} from "./types";
+import {ITasks} from "../types";
 
 interface IProps{
     changeTaskInTodolist:(idTodo:string, taskId:string, task:ITasks)=>void,

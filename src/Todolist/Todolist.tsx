@@ -1,18 +1,18 @@
 import React from 'react';
-import './App.css';
-import {ITasks, ITodolist} from "./types";
-import TodolistTitle from "./TodolistTitle";
-import {AppStateType} from "./redux/store";
+import style from './Todolist.module.css';
+import {ITasks, ITodolist} from "../types";
+import TodolistTitle from "../Todolist/TodolistTitle";
+import {AppStateType} from "../redux/store";
 import {connect} from "react-redux";
 import {
     addTasksThunk, changeFilterValueAC, changeTaskAC, changeTaskThunk, changeTodolistTitleThunk, changeTodoTitleAC,
     deleteTaskThunk,
     deleteTodolistThunk,
     getTasksThunk
-} from "./redux/reducer";
-import AddNewIntemForm from "./ui/AddNewIntemForm";
-import ShowTasks from "./ShowTasks";
-import Footer from "./Footer";
+} from "../redux/reducer";
+import AddNewIntemForm from "../ui/AddNewIntemForm";
+import ShowTasks from "../Tasks/ShowTasks";
+import Footer from "../Footer/Footer";
 
 interface IProps {
     id: string,
@@ -72,7 +72,7 @@ class Todolist extends React.Component<IMapStateToProps & IMapDispatchToProps & 
 
     render() {
         return (
-            <div className="TodoList">
+            <div className={style.TodoList}>
                 <TodolistTitle changeTodoTitle={this.changeTodoTitle} updateTodoTitle={this.updateTodoTitle}
                                idTodo={this.props.id} deleteTodolist={this.deleteTodolist} title={this.props.title}/>
                 <AddNewIntemForm nameValue="Add Task" addItem={this.addNewTask}/>

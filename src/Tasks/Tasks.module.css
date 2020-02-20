@@ -1,0 +1,79 @@
+.OneTask {
+    margin-bottom: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 350px;
+    flex-direction: row;
+}
+.OneTaskBlockUpdate {
+    background-color: cyan;
+    padding: 5px;
+    width: 350px;
+    border: 1px solid black;
+}
+.editButton {
+    width: 50px;
+    border-radius: 5px;
+}
+.OneTaskBlock {
+    border: 1px solid black;
+    padding: 5px;
+    width: 350px;
+    background-color: blanchedalmond;
+}
+
+
+.showTasksContent {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.showTasksContent div {
+    width: 70px;
+
+}
+
+.showTasksContent .oneTaskContent {
+    width: 300px;
+    background-color: floralwhite;
+    padding:0 5px 5px 5px;
+    border-radius: 5px;
+}
+
+
+
+.showTasksContent .oneTaskContentWithLineThrow{
+    text-decoration: line-through;
+    width: 300px;
+    background-color: floralwhite;
+    padding:0 5px 5px 5px;
+    border-radius: 5px;
+}
+
+
+textarea {
+    height: 50px;
+    width: 330px;
+    border-radius: 5px;
+    background-color: floralwhite;
+    font-size: 17px;
+}
+
+select {
+    width: 150px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: gainsboro;
+    color: darkblue;
+    padding-left: 50px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+p {
+    display: inline;
+    color: darkblue;
+    font-weight: bold;
+}
+

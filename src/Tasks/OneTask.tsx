@@ -1,5 +1,6 @@
 import React from 'react';
-import {ITasks} from "./types";
+import {ITasks} from "../types";
+import style from './Tasks.module.css'
 
 
 interface IProps {
@@ -93,28 +94,28 @@ class OneTask extends React.Component<IProps, IState> {
         }
 
         return (
-            <div className="OneTask">
+            <div className={style.OneTask}>
                 {this.state.isVisible ?
-                    <div className="OneTaskBlockUpdate">
-                        <form onChange={this.updateTaskInTodolist} className="form">
+                    <div className={style.OneTaskBlockUpdate}>
+                        <form onChange={this.updateTaskInTodolist} className={style.form}>
                             <p>Title:</p> <textarea autoFocus={true} value={this.props.task.title}/>
                             <div>
                                 <p>Priority:</p><select value={priority}>{this.state.priority.map((priority, idx) =>
                                 <option
                                     key={idx}>{priority}</option>)}</select>
                             </div>
-                            <button className="editButton" onClick={this.setChangeTask}> EDIT</button>
+                            <button className={style.editButton} onClick={this.setChangeTask}> EDIT</button>
                         </form>
                     </div> :
-                    <div className="OneTaskBlock"
+                    <div className={style.OneTaskBlock}
                          onDoubleClick={this.props.task.status === 2 ? () => this.setState({isVisible: false}) : () => this.setState({isVisible: true})}>
-                        <div className="showTasksContent">
+                        <div className={style.showTasksContent}>
                             <div>
                                 <input checked={this.props.task.status === 2 ? true : false}
                                        onChange={this.changeStatus} type="checkbox"/><p>Title:</p>
                             </div>
                             <div
-                                className={this.props.task.status === 2 ? 'oneTaskContentWithLineThrow' : 'oneTaskContent'}>{this.props.task.title + " "}</div>
+                                className={this.props.task.status === 2 ? style.oneTaskContentWithLineThrow : style.oneTaskContent}>{this.props.task.title + " "}</div>
                         </div>
                         <div>
                             <p>Priority:</p> {priority}

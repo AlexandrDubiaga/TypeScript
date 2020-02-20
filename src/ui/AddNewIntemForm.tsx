@@ -1,4 +1,5 @@
 import React, {ChangeEvent} from 'react';
+import  style from './AddNewItemForm.module.css'
 interface IProps {
     addItem: (value: string) => void,
     nameValue: string,
@@ -20,14 +21,14 @@ class AddNewIntemForm extends React.Component<IProps, IState> {
 
     render() {
         return (
-            <div className="AddNewItemBlock">
-                <h4 className="nameBlock">{this.props.nameValue}</h4>
+            <div className={style.AddNewItemBlock}>
+                <h4 className={style.nameBlock}>{this.props.nameValue}</h4>
                 <div>
-                    <input className="input" type="text" onChange={this.onChange} value={this.state.value}/>
-                    <button className="AddNewItemButton" disabled={this.state.value === ''}
+                    <input className={style.input} type="text" onChange={this.onChange} value={this.state.value}/>
+                    <button className={style.AddNewItemButton} disabled={this.state.value === ''}
                             onClick={this.onClick}>{this.state.value === '' ? 'Disabled' : "Add"}</button>
                 </div>
-                <div className="ErrorLenght">
+                <div className={style.ErrorLenght}>
 
                 </div>
 

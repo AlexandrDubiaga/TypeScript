@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from 'react';
-import './App.css';
-import Todolist from "./Todolist";
+import style from './App.module.css';
+import Todolist from "./Todolist/Todolist";
 import {ITodolist} from "./types";
 import {connect} from "react-redux";
 import {AppStateType} from "./redux/store";
@@ -32,10 +32,10 @@ class App extends React.Component<IMapStateToProps & IMapDispatchToProps> {
         })
         return (
             <>
-            <div className="AddNewTodolist">
+            <div className={style.AddNewTodolist}>
                 <AddNewIntemForm nameValue="Add To Do List"  addItem={this.addNewTodo}/>
             </div>
-            <div className="App">
+            <div className={style.App}>
                 {todolists}
             </div>
             </>

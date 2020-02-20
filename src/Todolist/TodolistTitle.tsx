@@ -1,4 +1,5 @@
 import React,{ChangeEvent} from 'react';
+import style from './Todolist.module.css';
 
 interface IProps{
     idTodo:string,
@@ -28,9 +29,9 @@ class TodolistTitle extends React.Component<IProps,IState> {
     render() {
         return (
 
-            <div className="TodoTitle">
+            <div className={style.TodoTitle}>
                 {this.state.isVisible ?
-                    <div ><input className="input"
+                    <div ><input className={style.input}
                         onChange={this.updateTodoTitle}
                         autoFocus={true}
                         onBlur={this.setTodoTitle} value={this.props.title}/></div>
