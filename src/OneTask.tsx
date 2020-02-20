@@ -91,6 +91,7 @@ class OneTask extends React.Component<IProps, IState> {
                 priority = 'Server error';
                 break;
         }
+
         return (
             <div className="OneTask">
                 {this.state.isVisible ?
@@ -105,13 +106,15 @@ class OneTask extends React.Component<IProps, IState> {
                             <button className="editButton" onClick={this.setChangeTask}> EDIT</button>
                         </form>
                     </div> :
-                    <div className="OneTaskBlock" onDoubleClick={() => this.setState({isVisible: true})}>
+                    <div className="OneTaskBlock"
+                         onDoubleClick={this.props.task.status === 2 ? () => this.setState({isVisible: false}) : () => this.setState({isVisible: true})}>
                         <div className="showTasksContent">
                             <div>
                                 <input checked={this.props.task.status === 2 ? true : false}
                                        onChange={this.changeStatus} type="checkbox"/><p>Title:</p>
                             </div>
-                            <div className="oneTaskContent">{this.props.task.title + " "}</div>
+                            <div
+                                className={this.props.task.status === 2 ? 'oneTaskContentWithLineThrow' : 'oneTaskContent'}>{this.props.task.title + " "}</div>
                         </div>
                         <div>
                             <p>Priority:</p> {priority}
